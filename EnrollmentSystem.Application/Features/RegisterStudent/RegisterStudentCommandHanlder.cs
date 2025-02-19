@@ -1,24 +1,29 @@
 ﻿using AutoMapper;
-using EnrollmentSystem.Application.Commands;
 using EnrollmentSystem.Application.Repositories;
+using EnrollmentSystem.Application.Services;
 using EnrollmentSystem.Application.UnitOfWork;
 using EnrollmentSystem.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EnrollmentSystem.Domain.Exceptions;
+using MediatR;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace EnrollmentSystem.Application.Features.RegisterStudent;
 
-internal class RegisterStudentCommandHanlder(IStudentRepository studentRepository, IMapper mapper, IUnitOfWork unitOfWork) : ICommandHandler<RegisterStudentCommand, bool>
+public class RegisterStudentCommandHandler(IStudentRepository studentRepository, IMapper mapper, IUnitOfWork unitOfWork,
+    PasswordEncryptionService passwordEncryptionService) : IRequestHandler<RegisterStudentCommand, bool>
 {
-    public async Task<bool> HandleAsync(RegisterStudentCommand command)
+    public async Task<bool> Handle(RegisterStudentCommand request, CancellationToken cancellationToken)
     {
-        var student = mapper.Map<Student>(command);
-        bool added = await studentRepository.AddAsync(student);
-        if (added)
-            await unitOfWork.SaveChangesAsync();
-        return added;
+        var existingStudent = await studentRepository.GetByEmailAsync(request.StudentEmail);
+        if (existingStudent is not null)
+        {
+            throw new BusinessException("A student with this email already exists.");
+        }
+        var encryptedPassword = passwordEncryptionService.HashPassword(request.StudentPassword);
+        var student = mapper.Map<Student>(request);
+        student.StudentPassword = encryptedPassword;
+        await studentRepository.AddAsync(student);
+        await unitOfWork.SaveChangesAsync();
+        return true;
     }
 }

@@ -1,11 +1,6 @@
 ﻿using EnrollmentSystem.Application.Repositories;
 using EnrollmentSystem.Application.UnitOfWork;
 using EnrollmentSystem.Infrastructure.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EnrollmentSystem.Infrastructure.UnitOfWork;
 

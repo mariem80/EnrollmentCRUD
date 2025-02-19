@@ -42,6 +42,38 @@ namespace EnrollmentSystem.Infrastructure.Migrations
                     b.HasIndex("InstructorID");
 
                     b.ToTable("Courses");
+
+                    b.HasData(
+                        new
+                        {
+                            CourseID = 1,
+                            CourseName = "German A1",
+                            InstructorID = 1
+                        },
+                        new
+                        {
+                            CourseID = 2,
+                            CourseName = "German A2",
+                            InstructorID = 1
+                        },
+                        new
+                        {
+                            CourseID = 3,
+                            CourseName = "Spanish",
+                            InstructorID = 2
+                        },
+                        new
+                        {
+                            CourseID = 4,
+                            CourseName = "English B2",
+                            InstructorID = 3
+                        },
+                        new
+                        {
+                            CourseID = 5,
+                            CourseName = "English C1",
+                            InstructorID = 3
+                        });
                 });
 
             modelBuilder.Entity("EnrollmentSystem.Domain.Entities.Enrollment", b =>
@@ -85,6 +117,26 @@ namespace EnrollmentSystem.Infrastructure.Migrations
                     b.HasKey("InstructorID");
 
                     b.ToTable("Instructors");
+
+                    b.HasData(
+                        new
+                        {
+                            InstructorID = 1,
+                            Email = "kenzy@example.com",
+                            InstructorName = "Kenzy"
+                        },
+                        new
+                        {
+                            InstructorID = 2,
+                            Email = "farida@example.com",
+                            InstructorName = "Farida"
+                        },
+                        new
+                        {
+                            InstructorID = 3,
+                            Email = "lara@example.com",
+                            InstructorName = "Lara"
+                        });
                 });
 
             modelBuilder.Entity("EnrollmentSystem.Domain.Entities.Student", b =>

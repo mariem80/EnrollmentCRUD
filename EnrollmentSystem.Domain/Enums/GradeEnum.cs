@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EnrollmentSystem.Application.Queries;
+namespace EnrollmentSystem.Domain.Enums;
 
-public interface IQuery
+public enum Grade
 {
+    NotAvailable,  
+    A,
+    B,
+    C,
+    D,
+    F
 }
 
-public interface IQuery<T> : IQuery
-{
-}

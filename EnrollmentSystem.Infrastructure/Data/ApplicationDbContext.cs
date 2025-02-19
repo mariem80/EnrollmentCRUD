@@ -42,13 +42,19 @@ public class ApplicationDbContext : DbContext
             .Property(i => i.InstructorID)
             .ValueGeneratedOnAdd();
 
-        //modelBuilder.Entity<Instructor>().HasData(
-        //    new Instructor { InstructorName = "Kenzy", Email = "kenzy@example.com" },
-        //    new Instructor { InstructorName = "Farida", Email = "farida@example.com" },
-        //    new Instructor { InstructorName = "Omar", Email = "omar@example.com" },
-        //    new Instructor { InstructorName = "Layla", Email = "layla@example.com" },
-        //    new Instructor { InstructorName = "Lara", Email = "lara@example.com" }
-        //);
+        modelBuilder.Entity<Instructor>().HasData(
+            new Instructor { InstructorID = 1, InstructorName = "Kenzy", Email = "kenzy@example.com" },
+            new Instructor { InstructorID = 2, InstructorName = "Farida", Email = "farida@example.com" },
+            new Instructor { InstructorID = 3, InstructorName = "Lara", Email = "lara@example.com" }
+        );
+
+        modelBuilder.Entity<Course>().HasData(
+            new Course { CourseID = 1, CourseName = "German A1", InstructorID = 1 },
+            new Course { CourseID = 2, CourseName = "German A2", InstructorID = 1 },
+            new Course { CourseID = 3, CourseName = "Spanish", InstructorID = 2 },
+            new Course { CourseID = 4, CourseName = "English B2", InstructorID = 3 },
+            new Course { CourseID = 5, CourseName = "English C1", InstructorID = 3 }
+        );
 
     }
 

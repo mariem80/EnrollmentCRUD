@@ -1,11 +1,5 @@
-﻿using EnrollmentSystem.Application.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using MediatR;
 
 namespace EnrollmentSystem.Application.Features.RegisterStudent;
 
-public sealed record RegisterStudentCommand(string StudentName, string StudentEmail, string StudentPassword) : ICommand<bool>;
+public sealed record RegisterStudentCommand(string StudentName, string StudentEmail, string StudentPassword) : IRequest<bool>;

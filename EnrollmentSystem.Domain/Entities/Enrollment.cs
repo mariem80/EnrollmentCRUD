@@ -6,7 +6,7 @@ public class Enrollment
     public int CourseID { get; set; }
     public DateTime? EnrollmentDate { get; set; }
     public string Grade { get; set; }
-    public required Student Student { get; set; }
-    public required Course Course { get; set; } 
+    public Student Student { get; set; }
+    public Course Course { get; set; } 
 
 }
